@@ -1,6 +1,8 @@
 "use client";
 import { Authuser } from "@/service/hook/userdata";
+import { logout } from "@/service/redux/features/auth/authSlice";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -26,9 +28,12 @@ const Header = () => {
         </div>
         {user === null ? (
           <>
-            <a href="/login" className="btn btn-primary">
+            <Link
+              href={"/login"}
+              className=" btn text-white border-0 bg-yellow-500 hover:bg-yellow-600"
+            >
               Sign In
-            </a>
+            </Link>
           </>
         ) : (
           <>
@@ -61,31 +66,40 @@ const Header = () => {
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button
+                    onClick={() => {
+                      dispach(logout(null));
+                      if (hasCookie("token") && hasCookie("role")) {
+                        document.cookie =
+                          "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        document.cookie =
+                          "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                      }
+                    }}
+                  >
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>
           </>
         )}
 
-        <label
-          htmlFor="admin-menu"
-          className=" drawer-button lg:hidden"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-                />
-            </svg>
+        <label htmlFor="admin-menu" className=" drawer-button lg:hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
         </label>
       </div>
     </div>

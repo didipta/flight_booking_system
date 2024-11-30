@@ -20,7 +20,7 @@ const Main = ({ children }) => {
               <Link href={"/admin-dashboard"}>Dashboard</Link>
             </li>
             <li>
-              <a>Flight List</a>
+              <Link href={"/flight-list"}>Flight List</Link>
             </li>
             <li>
               <a>Booking List</a>
