@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    BASE_URL: "http://localhost:5000/api/v1/",
+    BASE_URL: "https://flight-booking-system-backend-six.vercel.app/api/v1/",
   },
 };
 
