@@ -2,32 +2,45 @@
 import Api from "@/service/axios/baseInterceptors";
 import { cityOptions } from "@/utils/list/Citylist";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const FlightCard = ({ flight }) => {
   const [quaintity, setQuaintity] = useState(1);
+  const router = useRouter();
+  const { user, loading } = useSelector((state) => state.auth);
   const handleBook = () => {
-    const confirmed = Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to book this flight?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    });
-    if (confirmed) {
-      Api.post("/booking", {
-        flightId: flight.id,
-        numberOfSeats: quaintity,
-      })
-        .then((res) => {
-          toast.success("Flight booked successfully");
+    if (user === null) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please login to book a flight!",
+      });
+      router.push("/login");
+    } else {
+      const confirmed = Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to book this flight?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+      });
+      if (confirmed) {
+        Api.post("/booking", {
+          flightId: flight.id,
+          numberOfSeats: quaintity,
         })
-        .catch((err) =>
-          toast.error(err?.response?.data?.message || "Something went wrong")
-        );
+          .then((res) => {
+            toast.success("Flight booked successfully");
+          })
+          .catch((err) =>
+            toast.error(err?.response?.data?.message || "Something went wrong")
+          );
+      }
     }
   };
   return (
