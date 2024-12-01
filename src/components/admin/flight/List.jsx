@@ -10,6 +10,7 @@ const List = () => {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const [totalPage, setTotalPage] = useState(1);
   useEffect(() => {
     setLoading(true);
@@ -23,7 +24,8 @@ const List = () => {
     Api.get(`/flight?page=${page}`)
       .then((res) => {
         setFlights(res.data.data.data);
-        setTotalPage(res.data.meta.total);
+        setTotalPage(res.data.data.meta.total);
+        setLimit(res.data.data.meta.limit);
         setLoading(false);
       })
       .catch((err) => console.log(err))
@@ -109,7 +111,7 @@ const List = () => {
                       </div>
                     </div>
                   </td>
-                    <td>{flight.availableSeats}</td>
+                  <td>{flight.availableSeats}</td>
                   <td>
                     {cityOptions.map(
                       (city) => city.value === flight.origin && city.label
@@ -151,11 +153,16 @@ const List = () => {
                 Previous
               </button>
             </li>
-            {Array.from({ length: totalPage }, (v, k) => k + 1).map((p) => (
+            {Array.from(
+              {
+                length: Math.ceil(totalPage / limit),
+              },
+              (v, k) => k + 1
+            ).map((p) => (
               <li key={p}>
                 <button
                   onClick={() => handlePage(p)}
-                  className={`btn btn-sm ${
+                  className={`btn btn-sm mx-1 ${
                     p === page ? " btn-warning text-white" : ""
                   }`}
                 >

@@ -34,7 +34,7 @@ const Create = ({ id }) => {
           toast.success("Flight added successfully");
         })
         .catch((err) => {
-          toast.error("Something went wrong");
+          toast.error(err?.response?.data?.message);
         });
     }
   };

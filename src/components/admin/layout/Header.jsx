@@ -1,13 +1,16 @@
 "use client";
 import { Authuser } from "@/service/hook/userdata";
 import { logout } from "@/service/redux/features/auth/authSlice";
+import { hasCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const dispach = useDispatch();
+  const router = useRouter();
   const { user, loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -74,6 +77,7 @@ const Header = () => {
                           "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                         document.cookie =
                           "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        router.refresh();
                       }
                     }}
                   >

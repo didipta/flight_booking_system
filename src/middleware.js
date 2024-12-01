@@ -12,7 +12,12 @@ export function middleware(request) {
   const pathname = request.nextUrl.pathname;
 
   // Define role-based access
-  const adminRoutes = ["/admin-dashboard", "/manage-users"];
+  const adminRoutes = [
+    "/admin-dashboard",
+    "/flight-create",
+    "/flight-update",
+    "/flight-list",
+  ];
   const userRoutes = ["/user", "/user-dashboard", "/profile"];
 
   if (
@@ -37,5 +42,11 @@ export function middleware(request) {
 
 // Apply middleware only to specific routes
 export const config = {
-  matcher: ["/admin-dashboard", "/profile"], // Apply to admin and user routes
+  matcher: [
+    "/admin-dashboard",
+    "/flight-create",
+    "/flight-update",
+    "/flight-list",
+    "/profile",
+  ], // Apply to admin and user routes
 };
