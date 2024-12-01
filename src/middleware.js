@@ -17,6 +17,7 @@ export function middleware(request) {
     "/flight-create",
     "/flight-update",
     "/flight-list",
+    "/booking-list",
   ];
   const userRoutes = ["/user", "/user-dashboard", "/profile"];
 
@@ -47,6 +48,7 @@ export const config = {
     "/flight-create",
     "/flight-update",
     "/flight-list",
+    "/booking-list",
     "/profile",
   ], // Apply to admin and user routes
 };
