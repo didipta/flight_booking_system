@@ -6,12 +6,13 @@ This project is a RESTful API for managing a flight booking system. It allows us
 
 ### Admin Login
 
-- **email**: admin@gmail.com -**password**: admin@
+- **email**: admin@gmail.com
+- **password**: admin@
 
 ### Link
 
-**FrontEnd**:https://flight-booking-chi-ivory.vercel.app
-**BackEnd**:https://flight-booking-system-backend-six.vercel.app/api/v1/
+- **FrontEnd**:https://flight-booking-chi-ivory.vercel.app
+- **BackEnd**:https://flight-booking-system-backend-six.vercel.app/api/v1/
 
 ## Features
 
