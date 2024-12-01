@@ -22,7 +22,7 @@ const Navlist = () => {
               <Link href={"/flight-list"}>Flight List</Link>
             </li>
             <li>
-              <a>Booking List</a>
+              <Link href={"/booking-list"}>Booking List</Link>
             </li>
             <li>
               <a>Settings</a>
